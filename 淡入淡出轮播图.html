@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0 ;
+			padding: 0;}
+			#con{
+				width: 790px;
+				height: 340px;
+				border: solid crimson 2px;
+				margin: 0 auto;
+				position: relative;	
+				
+			}
+			
+			#con img{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				display: none;}
+			.arrow{
+				width: 50px;
+				height: 80px;
+				background: rgba(0,0,0,0.4);
+				line-height: 80px;
+				position: absolute;
+                 cursor: pointer;
+                 top: 150px;
+                 text-align: center;
+                 font-size: 50px;
+                 color: #fff;      				
+			}
+			#prev{
+				left: 20px;
+				display: none;	
+			}
+			#next{
+				right: 20px;
+				display: none;
+			}
+			#con:hover .arrow{display: block;
+			}
+			.arrow:hover {background-color: rgba(0,0,0,0.7);}
+			#buttons{
+				width:150px;
+				height: 15px;
+				color: #fff;
+				position: absolute;
+				bottom: 20px;
+				left: 250px;		
+			}
+			#buttons span{
+				cursor: pointer;
+				width: 15px;
+				height: 15px;
+				float: left;
+				margin-left: 10px;
+				border: solid  2px #fff;
+					border-radius: 50%;
+			}
+			#buttons .on{background: red;
+			}	
+		</style>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	<script type="text/javascript">
+		$(function(){
+			 var c=1;
+			 if(c<=5){
+			c++;
+		}
+			 $("#con  img").eq(0).show();
+		$("#buttons span ").eq(0).addClass("on");
+$("#buttons span").click(function(){
+	if($("#con img ").is(':animated')){
+	 			return;
+	 		}
+			$(this).addClass("on").siblings().removeClass("on");
+			var c=$(this).index();
+			$("#con img").eq(c).stop().fadeIn(400).siblings().stop().fadeOut(400);
+          })
+      var t=setInterval(go,1000);
+        var c=0;
+ function go(){
+ 	c++;
+	 		
+	 		if(c==5)
+	 		{
+	 			c=0;	
+	 		}
+	 		$("#buttons span ").eq(c).addClass("on").siblings().removeClass("on");
+	 	$("#con img").eq(c).stop().fadeIn(400).siblings().stop().fadeOut(400);
+ 	}
+ function goL(){
+ 	         c--;
+	 		
+	 		if(c==-1)
+	 		{
+	 			c=4;
+	 		}
+	 		$("#buttons span ").eq(c).addClass("on").siblings().removeClass("on");
+	 	$("#con img").eq(c).stop().fadeIn(400).siblings().stop().fadeOut(400);
+	 		 			
+ }
+	 	$("#next").click(function(){
+	 		if($("#con img ").is(':animated')){
+	 			return;
+	 		}
+	 	go();
+		})
+	 	$("#prev").click(function(){
+	 		if($("#con img ").is(':animated')){
+	 			return;
+	 		}
+	 		goL();
+ })
+ $("#con").hover(function(){
+			clearInterval(t)
+		},function(){
+			t=setInterval(go,1000);
+		
+		})
+            })
+	</script>
+	
+	</head>
+	
+	<body>
+		<div id="con">
+			<div class="jd">
+				<img src="img/image/1.jpg">
+					<img src="img/image/7.jpg">
+				<img src="img/image/8.jpg">
+					<img src="img/image/5.jpg">
+						<img src="img/image/6.jpg">
+			
+		
+					</div>
+					<a href="#"><div id="prev" class="arrow">&lt;</div></a>
+					<a href="#"><div id="next" class="arrow">&gt;</div></a>
+					<div id="buttons">
+						<span class="on"></span>
+						<span ></span>
+					<span ></span>
+						<span ></span>
+						<span></span>
+					</div>
+					
+</div>
+	</body>
+</html>
